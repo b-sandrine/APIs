@@ -5,6 +5,7 @@ const _ = require("lodash");
 const { v4: uuid} = require("uuid");
 
 const app = express();
+app.use(express.json) // to allow express send json data across
 // The end point can be localhost:3000/outfit
 app.get("/outfit",(req,res) => {
     let tops = ["Black", "Blue", "Orange", "Navy"];
@@ -18,6 +19,14 @@ app.get("/outfit",(req,res) => {
     })
 })
 
+app.post("/comments", (req,res) => {
+    // generate nesw id for the comment
+    const id = uuid();
+    const content = req.body.content;
+
+    console.log(content);
+    res.sendStatus(201);
+})
 
 app.listen(3000, () => {
     console.log("API Server started on port 3000")
